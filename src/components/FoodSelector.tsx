@@ -84,9 +84,17 @@ const FoodSelector = () => {
         />
         <IconButton
           aria-label="添加食物"
-          _icon={{ as: AddIcon }}
+          icon={<AddIcon />}
           onClick={addFood}
           colorScheme="teal"
+          size="md"
+          fontSize="20px"
+          variant="solid"
+          isRound
+          _hover={{
+            transform: 'scale(1.1)',
+          }}
+          transition="all 0.2s"
         />
       </HStack>
 
