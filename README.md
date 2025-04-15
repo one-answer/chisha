@@ -1,54 +1,87 @@
-# React + TypeScript + Vite
+# 吃啥 - 解决选择困难症
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+"吃啥"是一个帮助用户解决"今天吃什么"选择困难问题的有趣应用。使用React、TypeScript和Chakra UI构建，提供多种有趣的方式来随机选择或推荐食物。
 
-Currently, two official plugins are available:
+## 功能介绍
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 1. 随机食物选择
+- **食物库**：内置100+种常见食物选项
+- **自定义选项**：用户可以添加、删除自己的食物选项
+- **随机选择**：一键随机从食物库中选择一个选项
 
-## Expanding the ESLint configuration
+### 2. 食物选择轮盘动画
+- **视觉动画**：点击随机选择后，显示旋转的食物轮盘
+- **动态效果**：轮盘停止后高亮显示最终选择的食物
+- **沉浸体验**：通过动画增强选择过程的趣味性
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+### 3. 基于心情的食物推荐
+- **五种心情**：开心😄、难过😢、疲惫😴、饥饿🤤、压力大😰
+- **情绪匹配**：每种心情对应不同类型的食物推荐
+- **个性化选择**：根据当前情绪获取更贴合的食物建议
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+### 4. 基于时间的食物建议
+- **时间感知**：自动识别当前是早餐、午餐、下午茶、晚餐或夜宵时间
+- **智能推荐**：根据不同时段推荐适合的食物类型
+- **快捷选择**：点击推荐选项直接进入选择动画
+
+### 5. 食物趣味小知识
+- **知识拓展**：选择食物后显示随机的食物相关趣味知识
+- **增长见识**：了解各种食物的历史、文化和科学小知识
+- **寓教于乐**：在解决选择问题的同时学习有趣的知识
+
+## 技术栈
+
+- **前端框架**：React 18
+- **开发语言**：TypeScript
+- **构建工具**：Vite
+- **UI组件库**：Chakra UI
+- **动画效果**：Framer Motion
+
+## 如何使用
+
+### 安装依赖
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### 开发模式运行
+```bash
+npm run dev
 ```
+
+### 构建生产版本
+```bash
+npm run build
+```
+
+### 预览生产版本
+```bash
+npm run preview
+```
+
+## 项目结构
+
+```
+src/
+├── components/         # 组件目录
+│   ├── FoodSelector.tsx       # 主要食物选择器组件
+│   ├── MoodSelector.tsx       # 基于心情的食物推荐组件
+│   ├── TimeBasedSuggestion.tsx # 基于时间的食物建议组件
+│   └── FoodFunFact.tsx        # 食物趣味小知识组件
+├── App.tsx            # 应用主组件
+└── main.tsx           # 应用入口
+```
+
+## 贡献指南
+
+欢迎贡献新的功能或改进！如果您想为项目做出贡献，请：
+
+1. Fork 本仓库
+2. 创建您的特性分支 (`git checkout -b feature/amazing-feature`)
+3. 提交您的更改 (`git commit -m 'Add some amazing feature'`)
+4. 推送到分支 (`git push origin feature/amazing-feature`)
+5. 开启一个 Pull Request
+
+## 许可证
+
+本项目采用 MIT 许可证 - 详情请参阅 [LICENSE](LICENSE) 文件
