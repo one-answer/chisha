@@ -8,7 +8,7 @@ const structuredData = {
   "@type": "WebApplication",
   "name": "吃啥",
   "alternateName": "今天吃什么",
-  "description": "一个帮助解决"今天吃什么"选择困难症的有趣应用",
+  "description": "一个帮助解决\"今天吃什么\"选择困难症的有趣应用",
   "applicationCategory": "LifestyleApplication",
   "operatingSystem": "All",
   "offers": {
