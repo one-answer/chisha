@@ -2,14 +2,14 @@ import { useState } from 'react'
 import {
   Box,
   Button,
-  Flex,
   Text,
   VStack,
-  HStack,
+  SimpleGrid,
   useRadioGroup,
   useRadio,
   UseRadioProps,
-  chakra
+  chakra,
+  Badge,
 } from '@chakra-ui/react'
 
 // 定义心情类型
@@ -57,24 +57,33 @@ const MoodRadioCard = (props: UseRadioProps & { mood: Mood }) => {
         {...checkbox}
         cursor='pointer'
         borderWidth='1px'
-        borderRadius='md'
-        boxShadow='md'
+        borderRadius='24px'
+        borderColor='rgba(138, 90, 61, 0.14)'
+        bg='rgba(255, 248, 242, 0.9)'
         _checked={{
-          bg: 'teal.600',
+          bg: '#7d4c31',
           color: 'white',
-          borderColor: 'teal.600',
-          transform: 'scale(1.1)',
+          borderColor: '#7d4c31',
+          transform: 'translateY(-3px)',
+          boxShadow: '0 18px 30px rgba(125, 76, 49, 0.25)',
         }}
         _focus={{
           boxShadow: 'outline',
         }}
+        _hover={{
+          transform: 'translateY(-2px)',
+        }}
         px={5}
-        py={3}
-        transition="all 0.2s"
+        py={4}
+        transition="all 0.22s ease"
+        h='100%'
       >
-        <VStack>
+        <VStack align='start' spacing={2}>
           <Text fontSize="2xl">{moodEmojis[mood]}</Text>
-          <Text fontWeight="bold">{mood}</Text>
+          <Text fontWeight="bold" textTransform="capitalize">{mood}</Text>
+          <Text fontSize="sm" opacity={0.78}>
+            {moodDescriptions[mood]}
+          </Text>
         </VStack>
       </Box>
     </chakra.label>
@@ -106,33 +115,66 @@ const MoodSelector = ({ onSelectFood }: MoodSelectorProps) => {
   }
   
   return (
-    <VStack spacing={6} width="100%">
-      <Text fontSize="lg" fontWeight="medium" color="gray.600">
-        根据心情选择食物
-      </Text>
+    <VStack spacing={6} width="100%" align="stretch">
+      <Box>
+        <Badge
+          px={3}
+          py={1}
+          borderRadius="full"
+          bg="orange.100"
+          color="orange.800"
+          fontSize="xs"
+          letterSpacing="0.08em"
+        >
+          MOOD MATCH
+        </Badge>
+        <Text fontSize="xl" fontWeight="bold" mt={3}>
+          你现在是什么状态？
+        </Text>
+        <Text mt={1} color="rgba(47, 36, 31, 0.68)">
+          选一个最接近的情绪，让今天这顿饭更像一次情绪安抚。
+        </Text>
+      </Box>
       
-      <HStack {...group} spacing={4} flexWrap="wrap" justifyContent="center">
+      <SimpleGrid {...group} columns={{ base: 1, md: 2 }} spacing={4}>
         {moods.map((mood) => {
           const radio = getRadioProps({ value: mood })
           return (
             <MoodRadioCard key={mood} mood={mood} {...radio} />
           )
         })}
-      </HStack>
+      </SimpleGrid>
       
       {selectedMood && (
-        <Box textAlign="center" p={3} bg="gray.100" borderRadius="md" width="100%">
-          <Text>{moodDescriptions[selectedMood]}</Text>
+        <Box
+          textAlign="left"
+          p={4}
+          bg="rgba(255, 243, 231, 0.92)"
+          borderRadius="22px"
+          border="1px solid rgba(138, 90, 61, 0.12)"
+          width="100%"
+        >
+          <Text fontSize="sm" color="rgba(47, 36, 31, 0.62)">
+            当前推荐策略
+          </Text>
+          <Text mt={1} fontWeight="bold">
+            {moodDescriptions[selectedMood]}
+          </Text>
         </Box>
       )}
       
       <Button
-        colorScheme="purple"
+        bg="#2f241f"
+        color="white"
+        _hover={{ bg: '#4a382f' }}
+        _active={{ bg: '#241b17' }}
         isDisabled={!selectedMood}
         onClick={handleSuggestFood}
         width="100%"
+        size="lg"
+        borderRadius="full"
       >
-        根据心情推荐
+        给我一个贴心推荐
       </Button>
     </VStack>
   )

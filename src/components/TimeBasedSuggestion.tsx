@@ -3,10 +3,9 @@ import {
   Box,
   Text,
   Badge,
-  HStack,
+  SimpleGrid,
   VStack,
-  useColorModeValue,
-  Tooltip
+  Button,
 } from '@chakra-ui/react'
 
 // 根据时间段推荐不同的食物类型
@@ -65,54 +64,74 @@ const TimeBasedSuggestion = ({ onSelectFood }: TimeBasedSuggestionProps) => {
     
     return () => clearInterval(timer)
   }, [])
-  
-  const bgColor = useColorModeValue('gray.100', 'gray.700')
-  const borderColor = useColorModeValue('gray.200', 'gray.600')
-  
+
   const foods = timeBasedFoods[timeOfDay]
   
   return (
-    <Box 
-      p={4} 
-      bg={bgColor} 
-      borderRadius="md" 
-      borderWidth="1px" 
-      borderColor={borderColor}
+    <Box
+      p={{ base: 5, md: 6 }}
+      bg="rgba(255,255,255,0.72)"
+      borderRadius="28px"
+      borderWidth="1px"
+      borderColor="rgba(126, 82, 54, 0.12)"
       width="100%"
+      boxShadow="0 18px 50px rgba(121, 74, 47, 0.08)"
     >
-      <VStack align="start" spacing={3}>
-        <HStack>
-          <Text fontSize="lg" fontWeight="bold">
-            {timeEmojis[timeOfDay]} 现在是{timeNames[timeOfDay]}时间
+      <VStack align="start" spacing={4}>
+        <Badge
+          px={3}
+          py={1}
+          borderRadius="full"
+          bg="rgba(255, 170, 90, 0.18)"
+          color="orange.800"
+          fontSize="xs"
+          letterSpacing="0.08em"
+        >
+          TIME PICK
+        </Badge>
+
+        <Box>
+          <Text fontSize="xl" fontWeight="bold">
+            {timeEmojis[timeOfDay]} 现在适合吃点 {timeNames[timeOfDay]}
           </Text>
-          <Badge colorScheme="purple">
+          <Text mt={2} color="rgba(47, 36, 31, 0.66)">
+            不知道从哪里开始时，先顺着时间节奏选，通常比较不容易后悔。
+          </Text>
+        </Box>
+
+        <Badge
+          bg="rgba(47, 36, 31, 0.94)"
+          color="orange.50"
+          px={3}
+          py={1.5}
+          borderRadius="full"
+        >
+          当前时间 {' '}
             {currentTime.getHours().toString().padStart(2, '0')}:
             {currentTime.getMinutes().toString().padStart(2, '0')}
-          </Badge>
-        </HStack>
-        
-        <Text fontSize="sm" color="gray.500">
-          这个时间段适合吃：
-        </Text>
-        
-        <HStack flexWrap="wrap" spacing={2}>
+        </Badge>
+
+        <SimpleGrid columns={{ base: 2, md: 4 }} spacing={3} width="100%">
           {foods.map(food => (
-            <Tooltip key={food} label="点击选择这个" placement="top">
-              <Badge
-                colorScheme="teal"
-                variant="solid"
-                p={2}
-                borderRadius="md"
-                cursor="pointer"
-                onClick={() => onSelectFood(food)}
-                _hover={{ transform: 'scale(1.1)' }}
-                transition="all 0.2s"
-              >
-                {food}
-              </Badge>
-            </Tooltip>
+            <Button
+              key={food}
+              onClick={() => onSelectFood(food)}
+              variant="outline"
+              justifyContent="center"
+              h="56px"
+              borderRadius="18px"
+              borderColor="rgba(138, 90, 61, 0.18)"
+              bg="rgba(255, 248, 242, 0.72)"
+              _hover={{
+                bg: 'rgba(255, 170, 90, 0.18)',
+                transform: 'translateY(-2px)',
+              }}
+              transition="all 0.2s ease"
+            >
+              {food}
+            </Button>
           ))}
-        </HStack>
+        </SimpleGrid>
       </VStack>
     </Box>
   )

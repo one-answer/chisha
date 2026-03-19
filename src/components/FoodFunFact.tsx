@@ -4,7 +4,7 @@ import {
   Text,
   Icon,
   Flex,
-  useColorModeValue
+  Badge,
 } from '@chakra-ui/react'
 import { InfoIcon } from '@chakra-ui/icons'
 
@@ -51,27 +51,29 @@ const FoodFunFact = ({ selectedFood }: FoodFunFactProps) => {
       setFact(foodFacts[randomIndex])
     }
   }, [selectedFood])
-  
-  const bgColor = useColorModeValue('yellow.50', 'yellow.900')
-  const borderColor = useColorModeValue('yellow.200', 'yellow.700')
-  
+
   if (!selectedFood || !fact) return null
   
   return (
-    <Box 
-      p={4} 
-      bg={bgColor} 
-      borderRadius="md" 
-      borderWidth="1px" 
-      borderColor={borderColor}
+    <Box
+      p={5}
+      bg="rgba(255, 248, 210, 0.72)"
+      borderRadius="24px"
+      borderWidth="1px"
+      borderColor="rgba(171, 133, 48, 0.18)"
       width="100%"
       mt={4}
     >
-      <Flex align="center" mb={2}>
-        <Icon as={InfoIcon} color="yellow.500" mr={2} />
-        <Text fontWeight="bold" color="yellow.500">趣味小知识</Text>
+      <Flex align="center" mb={3} gap={2}>
+        <Icon as={InfoIcon} color="yellow.700" />
+        <Badge bg="yellow.200" color="yellow.900" borderRadius="full" px={3} py={1}>
+          MENU GOSSIP
+        </Badge>
       </Flex>
-      <Text fontSize="sm">{fact}</Text>
+      <Text fontWeight="bold" mb={1}>
+        关于 {selectedFood} 的随机餐桌小知识
+      </Text>
+      <Text fontSize="sm" color="rgba(47, 36, 31, 0.82)">{fact}</Text>
     </Box>
   )
 }
